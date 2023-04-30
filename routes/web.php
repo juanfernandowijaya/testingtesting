@@ -28,7 +28,7 @@ use App\Http\Controllers\pengaturanHalamanController;
 
 Route::get('/', [depanController::class, "index"]);
 
-Route::redirect('home', 'dashboard');
+Route::redirect('home', 'admin');
 
 Route::get('/auth', [authController::class, "index"])->name('login')->middleware('guest');
 
@@ -38,11 +38,15 @@ Route::get('/auth/callback', [authController::class, "callback"])->middleware('g
 
 route::get('/auth/logout',[authController::class,"logout"]);
 
-// Route::get('/dashboard', function(){
-//     return view('dashboard.index');
-// })->middleware('auth');
+// Route::domain('blog.laravel-porto2.test')->middleware(['web'])->group(function () {
+//     Route::get('/', [depanController::class, "index"]);
+// });
+// Route::domain('blog.laravel-porto2.test')->middleware(['web'])->group(function () {
+//     Route::get('/', [depanController::class, "index"]);
+// });
 
-Route::prefix('dashboard')->middleware('auth')->group(
+
+Route::prefix('setting')->middleware('auth')->group(
     function(){
         Route::get('/', [halamanController::class, 'index']);
         Route::resource('/halaman', halamanController::class);

@@ -25,8 +25,8 @@ class authController extends Controller
         $name  = $user->name;
         $avatar = $user->avatar;
 
-        // $check = User::where('email', $email)->count();
-        $check = 1; 
+        $check = User::where('email', $email)->count();
+        // $check = 1; 
         if($check > 0) {
             $avatar_file =  $id.".jpg";
             $fileContent = file_get_contents($avatar);
@@ -40,7 +40,8 @@ class authController extends Controller
                 ]
             );
             Auth::login($user);
-            return redirect()->to('dashboard');
+            return redirect()->to('setting');
+            // return redirect()->route('profile.index')->with('success','Berhasil update Profile');
         }
         else {
             return redirect()->to('auth')->with('error',  'Akun yang anda masukkan tidak diizinkan untuk menggunakan halaman Admin!');
